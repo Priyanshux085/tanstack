@@ -4,8 +4,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-
-import "./styles/globals.css";
+import globalsCss from "@/styles/globals.css?url";
+import ThemeToggle from "@/components/ui/theme-toggle";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,21 +20,33 @@ export const Route = createRootRoute({
     links: [
       {
         rel: "stylesheet",
-        href: "./styles/globals.css",
+        href: globalsCss,
       },
     ],
   }),
   component: RootLayout,
 });
 
+function SetInitialThemeScript() {
+  const code = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){} })();`;
+  return <script dangerouslySetInnerHTML={{ __html: code }} />;
+}
+
 export function RootLayout() {
   return (
     <html lang="en">
       <head>
+        <SetInitialThemeScript />
         <HeadContent />
       </head>
       <body>
+        <div className="fixed top-4 right-4 z-50 flex gap-3 items-center">
+          {/* <AuthStatus /> */}
+          <ThemeToggle />
+        </div>
+        {/* <AuthProvider> */}
         <Outlet />
+        {/* </AuthProvider> */}
         <Scripts />
       </body>
     </html>

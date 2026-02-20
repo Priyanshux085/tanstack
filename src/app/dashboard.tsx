@@ -24,25 +24,6 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function RouteComponent() {
-  // protect this route client-side
-  // const { user, loading } = useAuth();
-
-  // React.useEffect(() => {
-  //   if (!loading && !user) {
-  //     window.location.href = "/login";
-  //   }
-  // }, [loading, user]);
-
-  // if (loading || !user) {
-  //   return (
-  //     <div className="min-h-dvh w-screen flex items-center justify-center p-4">
-  //       <div className="rounded-md bg-muted/50 p-6">
-  //         Redirecting to sign in…
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <SidebarProvider>
       <AppSidebar />
